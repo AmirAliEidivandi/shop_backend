@@ -1,23 +1,20 @@
 import * as express from "express";
 import { Application } from "express";
-import Router from "./router";
-
-class App {
+import { RouteService } from "./routes/route.service";
+export class App {
     public app: Application;
-    private router: Router;
+    private router: RouteService;
 
     constructor(public port: number) {
         this.app = express();
         port;
-        this.router = new Router(this.app);
-        this.router.run();
+        this.router = new RouteService(this.app);
     }
 
     public start(): void {
+        this.router.run();
         this.app.listen(this.port, () => {
             console.log("app is running...");
         });
     }
 }
-
-export default App;

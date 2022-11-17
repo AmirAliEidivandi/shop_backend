@@ -1,11 +1,9 @@
 import { Request, Response } from "express";
 
-class ProductsController {
+export default class ProductsController {
     constructor() {}
 
     public index(req: Request, res: Response) {
         res.send({ allProducts: [] });
     }
 }
-
-export default ProductsController;

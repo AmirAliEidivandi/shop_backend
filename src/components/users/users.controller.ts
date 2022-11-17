@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import User from "./model/User";
 
-class UsersController {
+export default class UsersController {
 
     public async index(req: Request, res: Response) {
         const users = await User.find();
@@ -29,5 +29,3 @@ class UsersController {
         res.status(201).json(newUser);
     }
 }
-
-export default UsersController;

@@ -1,4 +1,5 @@
 import { Schema, model } from "mongoose";
+import addressSchema from "./Address";
 import IUser from "./IUser";
 
 const userSchema: Schema = new Schema({
@@ -27,6 +28,9 @@ const userSchema: Schema = new Schema({
     wallet: {
         type: Number,
         default: 0,
+    },
+    addresses: {
+        type: [addressSchema],
     },
     created_at: {
         type: Date,

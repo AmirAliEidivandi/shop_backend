@@ -21,20 +21,24 @@ const orderSchema: Schema = new Schema({
         required: true,
     },
     order_lines: {
-        type: [orderLineSchema]
+        type: [orderLineSchema],
     },
     status: {
         type: OrderStatus,
         required: true,
         default: OrderStatus.INIT,
     },
+    delivery_address: {
+        type: Object,
+        default: null,
+    },
     created_at: {
         type: Date,
-        default: Date.now()
+        default: Date.now(),
     },
     updated_at: {
         type: Date,
-        default: Date.now()
+        default: Date.now(),
     },
 });
 

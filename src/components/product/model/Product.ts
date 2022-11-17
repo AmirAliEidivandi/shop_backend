@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 import IProduct from "./IProduct";
-import ProductStatus from "./product.status";
+import ProductStatus from "./ProductStatus";
 
 const productSchema: Schema = new Schema({
     title: {
@@ -23,11 +23,11 @@ const productSchema: Schema = new Schema({
     },
     product_category: {
         type: Schema.Types.ObjectId,
-        ref: 'ProductCategory'
+        ref: "ProductCategory",
     },
     attributes: {
         type: [Object],
-        required: true
+        required: true,
     },
     created_at: {
         type: Date,

@@ -1,6 +1,6 @@
 import { Document } from "mongoose";
 import IProductAttribute from "./IProductAttribute";
-import ProductStatus from "./product.status";
+import ProductStatus from "./ProductStatus";
 
 export default interface IProduct extends Document {
     title: string;

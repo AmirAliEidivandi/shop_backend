@@ -1,6 +1,6 @@
 import * as express from "express";
 import { Application } from "express";
-import { RouteService } from "./routes/route.service";
+import { RouteService } from "./routes/routeService";
 import boot from "./boot";
 export class App {
     public app: Application;
@@ -15,7 +15,7 @@ export class App {
         boot(this.app);
         this.router.run();
         this.app.listen(this.port, () => {
-            console.log("app is running...");
+            console.log(`app is running on port ${this.port}`);
         });
     }
 }

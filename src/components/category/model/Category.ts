@@ -15,4 +15,8 @@ const categorySchema: Schema = new Schema({
     },
 });
 
+categorySchema.set("toJSON", {
+    virtuals: true,
+});
+
 export default model<CategoryInterface>("Category", categorySchema);

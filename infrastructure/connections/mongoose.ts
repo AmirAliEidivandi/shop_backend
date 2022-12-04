@@ -4,7 +4,11 @@ mongoose.connection.on("open", () => console.log("mongo connection is open..."))
 mongoose.connection.on("error", (err) => console.log(`failed to connect`, err.message));
 
 const startMongoose = () => {
-    mongoose.connect(`${process.env.MONGO_URI}`);
-}
+    try {
+        mongoose.connect(`${process.env.MONGO_URI}`);
+    } catch (error) {
+        console.log(error);
+    }
+};
 
 export default startMongoose;

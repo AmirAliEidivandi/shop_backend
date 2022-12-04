@@ -10,8 +10,8 @@ export default class CategoriesController {
         return res.json(newCategory);
     }
 
-    public async list(req: Request, res: Response) {
-        const categoriesList = await Category.find();
+    public async list(req: Request, res: Response, next: NextFunction) {
+        const categoriesList = await Category.find({}, {title: 1, slug: 1});
         return res.json(categoriesList);
     }
 }

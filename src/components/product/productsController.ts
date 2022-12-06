@@ -10,8 +10,11 @@ export default class ProductsController {
     }
 
     public create(req: Request, res: Response) {
-        const thumbnail: UploadedFile = req.files?.thumbnail as UploadedFile;
-        thumbnail.mv(path.join(process.env.APP_ROOT as string, `/uploads/${thumbnail.name}`), (err) => console.log(err.message));
-        res.send(thumbnail);
+        if (req.files) {
+            const thumbnail: UploadedFile = req.files.thumbnail as UploadedFile;
+            thumbnail.mv(path.join(process.env.APP_ROOT as string, `/uploads/${thumbnail.name}`));
+            res.send(thumbnail);
+        }
+        res.send({ attributes: JSON.parse(req.body.attributes) });
     }
 }

@@ -1,6 +1,7 @@
 import { Application, Router } from "express";
-import usersRouter from "../components/users/users.routes";
-import productsRouter from "../components/product/products.routes";
+import usersRouter from "../components/users/usersRouter";
+import productsRouter from "../components/product/productsRouter";
+import categoriesRouter from "../components/category/CategoryRouter";
 import RouteEngine from "./router";
 
 export class RouteService {
@@ -14,6 +15,7 @@ export class RouteService {
     public bindRouters() {
         this.router.registerRouter("/api/v1/users", usersRouter);
         this.router.registerRouter("/api/v1/products", productsRouter);
+        this.router.registerRouter("/api/v1/categories", categoriesRouter);
     }
 
     public run() {

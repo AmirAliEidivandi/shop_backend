@@ -5,12 +5,12 @@ import ProductStatus from "./ProductStatus";
 export default interface IProduct extends Document {
     title: string;
     price: number;
-    sale_price: number;
     thumbnail: string;
-    gallery?: [string];
-    product_category: number;
-    attributes: [IProductAttribute];
-    created_at: Date;
-    updated_at: Date;
+    gallery?: string[];
+    category: string;
+    attributes: IProductAttribute[];
+    createdAt: Date;
+    updatedAt: Date;
+    stock: number;
     status: ProductStatus;
 }

@@ -1,6 +1,7 @@
 export default interface IProductAttribute {
     title: string;
-    name: string;
+    slug: string;
+    value: string;
     filterable: boolean;
-    is_multiple: boolean;
+    hasPrice: boolean;
 }

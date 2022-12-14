@@ -1,12 +1,19 @@
 import { Request, Response } from "express";
 import { UploadedFile } from "express-fileupload";
 import path = require("path");
+import IProductRepository from "./repositories/IProductRepository";
+import ProductMongoRepository from "./repositories/ProductMongoRepository";
 
 export default class ProductsController {
-    constructor() {}
+    private productsRepository: IProductRepository;
+    constructor() {
+        this.productsRepository = new ProductMongoRepository();
+        this.index = this.index.bind(this);
+    }
 
-    public index(req: Request, res: Response) {
-        res.send({ allProducts: [] });
+    public async index(req: Request, res: Response) {
+        const allProducts = await this.productsRepository.findMany({});
+        res.send({ allProducts });
     }
 
     public create(req: Request, res: Response) {

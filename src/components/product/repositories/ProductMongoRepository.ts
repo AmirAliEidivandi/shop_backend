@@ -2,6 +2,7 @@ import ProductStatus from "../model/ProductStatus";
 import IProductRepository from "./IProductRepository";
 import Product from "../model/Product";
 import IProduct from "../model/IProduct";
+import { FilterQuery } from "mongoose";
 
 export default class ProductMongoRepository implements IProductRepository {
     public async findByStatus(status: ProductStatus): Promise<IProduct[]> {
@@ -21,19 +22,19 @@ export default class ProductMongoRepository implements IProductRepository {
         return newProduct.save();
     }
 
-    public async updateOne(where: Partial<IProduct>, updateData: Partial<IProduct>): Promise<boolean> {
+    public async updateOne(where: FilterQuery<IProduct>, updateData: Partial<IProduct>): Promise<any | boolean> {
+        return Product.updateOne(where, updateData);
+    }
+
+    public async updateMany(where: FilterQuery<IProduct>, updateData: Partial<IProduct>): Promise<boolean> {
         return true;
     }
-    public async updateMany(where: Partial<IProduct>, updateData: Partial<IProduct>): Promise<boolean> {
-        return true;
-    }
-    
+
     public async deleteOne(ID: string): Promise<boolean> {
         return true;
     }
-    
+
     public async deleteMany(where: any): Promise<boolean> {
         return true;
     }
-    
 }

@@ -15,7 +15,7 @@ const productSchema: Schema = new Schema({
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now },
     stock: { type: Number, default: 0 },
-    status: { type: String, default: ProductStatus.INIT },
+    status: { type: Number, default: ProductStatus.INIT },
 });
 
 export default model<IProduct>("Product", productSchema);

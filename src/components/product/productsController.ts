@@ -16,7 +16,7 @@ export default class ProductsController {
 
     public async index(req: Request, res: Response) {
         const allProducts = await this.productsRepository.findMany({});
-        res.send({ allProducts });
+        res.status(200).json(allProducts);
     }
 
     public async create(req: Request, res: Response) {
@@ -32,13 +32,19 @@ export default class ProductsController {
         };
 
         const newProduct = await this.productsRepository.create(newProductParams);
-        res.send({ newProduct });
         if (req.files) {
             const thumbnail: UploadedFile = req.files.thumbnail as UploadedFile;
-            const galleryFiles: UploadedFile[] = req.files.gallery as UploadedFile[];
+            const galleryFiles: UploadedFile[] = req.files["gallery[]"] as UploadedFile[];
             const thumbnailName: string = await this.uploadService.upload(thumbnail);
             const gallery: string[] = await this.uploadService.uploadMany(galleryFiles);
+            await this.productsRepository.updateOne(
+                { _id: newProduct._id },
+                {
+                    thumbnail: thumbnailName,
+                    gallery,
+                }
+            );
         }
-        res.send({ attributes: JSON.parse(req.body.attributes) });
+        res.send(newProduct);
     }
 }

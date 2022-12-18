@@ -1,12 +1,13 @@
 import { UploadedFile } from "express-fileupload";
+import { join } from "path";
 import { hashFromUUID } from "./HashService";
-const ROOT_PATH: string = process.env.APP_ROOT as string;
+const ROOT_PATH: string = process.cwd();
 const CONTENT_PATH = "/public/contents/";
 
 export default class UploadService {
     private readonly basePath: string;
     constructor() {
-        this.basePath = `${ROOT_PATH}${CONTENT_PATH}`;
+        this.basePath = join(ROOT_PATH, CONTENT_PATH);
     }
 
     public async upload(file: UploadedFile): Promise<string> {
@@ -17,10 +18,10 @@ export default class UploadService {
 
     public async uploadMany(files: UploadedFile[]): Promise<string[]> {
         const newFilesNames: string[] = [];
-        files.forEach(async (file: UploadedFile) => {
-            const newFileName = await this.upload(file);
+        for (let i = 0; i < files.length; i++) {
+            const newFileName = await this.upload(files[i]);
             newFilesNames.push(newFileName);
-        });
+        }
         return newFilesNames;
     }
 

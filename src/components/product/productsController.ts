@@ -1,22 +1,25 @@
 import { Request, Response } from "express";
 import { UploadedFile } from "express-fileupload";
 import UploadService from "../../services/UploadService";
+import ProductTransformer from "./ProductTransformer";
 import IProductRepository from "./repositories/IProductRepository";
 import ProductMongoRepository from "./repositories/ProductMongoRepository";
 
 export default class ProductsController {
     private productsRepository: IProductRepository;
     private uploadService: UploadService;
+    private productsTransformer: ProductTransformer;
     constructor() {
         this.productsRepository = new ProductMongoRepository();
         this.uploadService = new UploadService();
+        this.productsTransformer = new ProductTransformer();
         this.index = this.index.bind(this);
         this.create = this.create.bind(this);
     }
 
     public async index(req: Request, res: Response) {
         const allProducts = await this.productsRepository.findMany({});
-        res.status(200).json(allProducts);
+        res.status(200).json(this.productsTransformer.collection(allProducts));
     }
 
     public async create(req: Request, res: Response) {

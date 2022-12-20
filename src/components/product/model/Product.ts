@@ -18,4 +18,13 @@ const productSchema: Schema = new Schema({
     status: { type: Number, default: ProductStatus.INIT },
 });
 
+productSchema.virtual("thumbnailUrl").get(function (this: IProduct) {
+    return `${process.env.APP_URL}contents/${this.thumbnail}`;
+});
+productSchema.virtual("galleryUrl").get(function (this: IProduct) {
+    return this.gallery?.map((item: string) => {
+        return `${process.env.APP_URL}contents/${item}`;
+    });
+});
+
 export default model<IProduct>("Product", productSchema);

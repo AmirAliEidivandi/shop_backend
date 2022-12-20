@@ -9,7 +9,9 @@ export default interface IProduct extends Document {
     price: number;
     discountedPrice: number;
     thumbnail?: string;
+    thumbnailUrl?: string;
     gallery?: string[];
+    galleryUrl?: string[];
     category: string;
     attributes: IAttributeGroup[];
     variations: IProductVariation[];

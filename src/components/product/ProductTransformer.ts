@@ -1,18 +1,25 @@
+import DateService from "../../services/DateService";
 import ITransformer from "../contracts/ITransformer";
 import IProduct from "./model/IProduct";
 
 export default class ProductTransformer implements ITransformer<IProduct> {
+    private readonly dateService: DateService;
+    constructor() {
+        this.dateService = new DateService();
+    }
+
     public transform(item: IProduct) {
         return {
             id: item._id,
             title: item.title,
-            thumbnail: item.thumbnail,
+            thumbnail: item.thumbnailUrl,
             price: item.price,
             discountedPrice: item.discountedPrice,
-            create_at: item.createdAt,
-            update_at: item.updatedAt,
-            gallery: item.gallery,
+            createdAt: this.dateService.toPersian(item.createdAt.toUTCString()),
+            updatedAt: this.dateService.toPersian(item.updatedAt.toUTCString()),
+            gallery: item.galleryUrl,
             status: item.status,
+            stock: item.stock,
         };
     }
 

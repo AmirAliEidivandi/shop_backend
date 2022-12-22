@@ -1,27 +1,36 @@
 import { FilterQuery } from "mongoose";
 import ISetting from "../model/ISetting";
+import Setting from "../model/Setting";
 import ISettingRepository from "./ISettingRepository";
 
 export default class SettingMongoRepository implements ISettingRepository {
-    findOne(ID: string): Promise<ISetting | null> {
+    public async findOne(ID: string): Promise<ISetting | null> {
+        return Setting.findById(ID);
+    }
+
+    public async findMany(params: any): Promise<ISetting[]> {
+        return Setting.find(params);
+    }
+
+    public async create(params: any): Promise<ISetting> {
+        const newSetting = new Setting({ ...params });
+        return newSetting.save();
+    }
+    
+    public async updateOne(where: FilterQuery<ISetting>, updateData: Partial<ISetting>): Promise<any> {
         throw new Error("Method not implemented.");
     }
-    findMany(params: any): Promise<ISetting[]> {
+
+    public async updateMany(where: FilterQuery<ISetting>, updateData: Partial<ISetting>): Promise<boolean> {
         throw new Error("Method not implemented.");
     }
-    create(params: any): Promise<ISetting> {
+
+    public async deleteOne(ID: string): Promise<boolean> {
         throw new Error("Method not implemented.");
     }
-    updateOne(where: FilterQuery<ISetting>, updateData: Partial<ISetting>): Promise<any> {
+
+    public async deleteMany(where: any): Promise<boolean> {
         throw new Error("Method not implemented.");
     }
-    updateMany(where: FilterQuery<ISetting>, updateData: Partial<ISetting>): Promise<boolean> {
-        throw new Error("Method not implemented.");
-    }
-    deleteOne(ID: string): Promise<boolean> {
-        throw new Error("Method not implemented.");
-    }
-    deleteMany(where: any): Promise<boolean> {
-        throw new Error("Method not implemented.");
-    }
+
 }

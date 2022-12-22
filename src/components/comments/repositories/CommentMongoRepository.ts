@@ -1,30 +1,35 @@
 import { FilterQuery } from "mongoose";
+import Comment from "../model/Comment";
 import IComment from "../model/IComment";
 import ICommentRepository from "./ICommentRepository";
 
 export default class CommentMongoRepository implements ICommentRepository {
-    findByProduct(productID: string): Promise<IComment[]> {
+    public async findOne(ID: string): Promise<IComment | null> {
+        return Comment.findById(ID);
+    }
+
+    public async findMany(params: any): Promise<IComment[]> {
+        return Comment.find(params);
+    }
+
+    public async create(params: any): Promise<IComment> {
+        const newComment = new Comment({ ...params });
+        return newComment.save();
+    }
+
+    public async updateOne(where: FilterQuery<IComment>, updateData: Partial<IComment>): Promise<any> {
         throw new Error("Method not implemented.");
     }
-    findOne(ID: string): Promise<IComment | null> {
+
+    public async updateMany(where: FilterQuery<IComment>, updateData: Partial<IComment>): Promise<boolean> {
         throw new Error("Method not implemented.");
     }
-    findMany(params: any): Promise<IComment[]> {
+
+    public async deleteOne(ID: string): Promise<boolean> {
         throw new Error("Method not implemented.");
     }
-    create(params: any): Promise<IComment> {
-        throw new Error("Method not implemented.");
-    }
-    updateOne(where: FilterQuery<IComment>, updateData: Partial<IComment>): Promise<any> {
-        throw new Error("Method not implemented.");
-    }
-    updateMany(where: FilterQuery<IComment>, updateData: Partial<IComment>): Promise<boolean> {
-        throw new Error("Method not implemented.");
-    }
-    deleteOne(ID: string): Promise<boolean> {
-        throw new Error("Method not implemented.");
-    }
-    deleteMany(where: any): Promise<boolean> {
+
+    public async deleteMany(where: any): Promise<boolean> {
         throw new Error("Method not implemented.");
     }
 }

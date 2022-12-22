@@ -1,7 +1,10 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import User from "./model/User";
 
 export default class UsersController {
+    constructor() {
+        this.store = this.store.bind(this);
+    }
     public async index(req: Request, res: Response) {
         const users = await User.find();
         res.status(200).json(users);
@@ -26,5 +29,19 @@ export default class UsersController {
 
         await newUser.save();
         res.status(201).json(newUser);
+    }
+
+    public async store(req: Request, res: Response, next: NextFunction) {
+        try {
+            const value = Math.random();
+            if (value > 0.5) {
+                throw new Error("thie request cannot be excuted!");
+            }
+            res.send({
+                success: true,
+            });
+        } catch (error) {
+            next(error);
+        }
     }
 }

@@ -6,5 +6,6 @@ const router: Router = Router();
 
 router.get("/", usersControllersInstance.index);
 router.post("/", usersControllersInstance.create);
+router.get('/store', usersControllersInstance.store)
 
 export default router;

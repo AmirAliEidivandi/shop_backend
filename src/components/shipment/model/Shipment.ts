@@ -7,7 +7,7 @@ const shipmentSchema: Schema = new Schema({
     selectedDateTime: { type: Date, required: true },
     deliveredAt: { type: Date, default: null },
     note: { type: String, default: null },
-    status: { type: ShipmentStatus, default: ShipmentStatus.PENDING },
+    status: { type: Number, default: ShipmentStatus.PENDING },
 });
 
 export default model<IShipment>("Shipment", shipmentSchema);

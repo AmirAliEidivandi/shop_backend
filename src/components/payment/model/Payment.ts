@@ -11,7 +11,7 @@ const paymentSchema: Schema = new Schema({
     reference: { type: String, required: true },
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now },
-    status: { type: PaymentStatus, required: true, default: PaymentStatus.PENDING },
+    status: { type: Number, required: true, default: PaymentStatus.PENDING },
 });
 
 export default model<IPayment>("Payment", paymentSchema);

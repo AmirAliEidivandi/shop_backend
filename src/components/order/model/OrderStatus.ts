@@ -1,13 +1,10 @@
+/* eslint-disable no-unused-vars */
 enum OrderStatus {
-    INIT,
-    PAID,
-    CONFIRMED,
-    INVENTORY,
-    READY,
-    SENT,
+    PENDING,
+    PAID_IN_PROGRESS,
     DELIVERED,
-    CANCELED,
     REFUNDED,
+    CANCELED,
 }
 
 export default OrderStatus;

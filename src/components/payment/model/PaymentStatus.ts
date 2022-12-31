@@ -1,7 +1,6 @@
 enum PaymentStatus {
     PENDING,
     SUCCESS,
-    FAIELD,
+    FAILED,
 }
-
 export default PaymentStatus;

@@ -1,4 +1,4 @@
 export default interface IPriceVariation {
-    title: number;
-    items: object[]
+    price: number;
+    items: object[];
 }

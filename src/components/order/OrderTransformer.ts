@@ -1,4 +1,4 @@
-import DateService from "src/services/DateService";
+import DateService from "../../services/DateService";
 import ITransformer from "../contracts/ITransformer";
 import IOrder from "./model/IOrder";
 
@@ -39,7 +39,7 @@ export default class OrderTransformer implements ITransformer<IOrder> {
         !coupon && null;
         return {
             code: coupon.code,
-            percent: coupon.percent
-        }
+            percent: coupon.percent,
+        };
     }
 }

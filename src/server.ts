@@ -1,8 +1,8 @@
-import { config } from "dotenv";
+import { config as loadEnvironmentsVars } from "dotenv";
 import { App } from "./app";
 import startMongoose from "../infrastructure/connections/mongoose";
 
-config();
+loadEnvironmentsVars();
 startMongoose();
 const port: number = 8000;
 const application = new App((process.env.PORT as undefined) || port);

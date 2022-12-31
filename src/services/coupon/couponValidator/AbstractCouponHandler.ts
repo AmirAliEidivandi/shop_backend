@@ -3,7 +3,7 @@ import IUser from "src/components/users/model/IUser";
 import CouponHandler from "./CouponHandler";
 
 abstract class AbstractCouponHandler implements CouponHandler {
-    private nextHandler: CouponHandler;
+    private nextHandler: CouponHandler | null = null;
 
     public setNext(handler: CouponHandler): CouponHandler {
         this.nextHandler = handler;

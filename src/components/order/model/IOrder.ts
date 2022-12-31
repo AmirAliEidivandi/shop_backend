@@ -1,14 +1,16 @@
 import { Document } from "mongoose";
+import IAddress from "../../users/model/IAddress";
+import IOrderLine from "./IOrderLine";
 import OrderStatus from "./OrderStatus";
 
 export default interface IOrder extends Document {
-    user: object;
-    total_price: number;
-    coupon: object;
-    final_price: number;
+    user: string;
+    totalPrice: number;
+    finalPrice: number;
+    orderLines: IOrderLine[];
+    deliveryAddress: IAddress;
+    coupon: string;
+    createdAt: Date;
+    updatedAt: Date;
     status: OrderStatus;
-    created_at: Date;
-    order_lines: [object];
-    delivery_address: object;
-    updated_at: Date;
 }

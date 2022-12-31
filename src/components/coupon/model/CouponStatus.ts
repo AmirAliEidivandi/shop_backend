@@ -1,6 +1,6 @@
 enum CouponStatus {
     ACTIVE,
-    INACTIVE
+    INACTIVE,
 }
 
 export default CouponStatus;

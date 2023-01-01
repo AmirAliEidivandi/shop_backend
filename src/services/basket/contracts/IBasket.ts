@@ -2,7 +2,7 @@ import IProduct from "src/components/product/model/IProduct";
 
 export default interface IBasket {
     add(product: IProduct): void;
-    remove(product: IProduct): void;
+    remove(product: IProduct): Promise<void>;
     items(): Promise<IProduct[]>;
     count(): Promise<number>;
     clear(): void;

@@ -3,10 +3,15 @@ import IUser from "src/components/users/model/IUser";
 import AbstractCouponHandler from "../AbstractCouponHandler";
 
 export default class UserHandler extends AbstractCouponHandler {
-    public process(user: IUser, coupon: ICoupon): ICoupon | null {
-        const { userConstraint } = coupon.constraints;
-        if (user.id !== userConstraint.id) throw new Error("This discount code has not been issued for your user");
+    public process(coupon: ICoupon, user?: IUser): ICoupon | null {
+        // const { users } = coupon.constraints;
 
-        return super.process(user, coupon);
+        if (coupon.constraints && "users" in coupon.constraints) {
+            const { users } = coupon.constraints;
+            if (user && users && users.length > 0 && !users.includes(user.id)) {
+                throw new Error("این کد تخفیف برای کاربری شما صادر نشده است");
+            }
+        }
+        return super.process(coupon, user);
     }
 }

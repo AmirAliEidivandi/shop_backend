@@ -1,8 +1,8 @@
-import ICoupon from "src/components/coupon/model/ICoupon";
-import IUser from "src/components/users/model/IUser";
 import CouponHandler from "./CouponHandler";
+import IUser from "src/components/users/model/IUser";
+import ICoupon from "src/components/coupon/model/ICoupon";
 
-abstract class AbstractCouponHandler implements CouponHandler {
+export default abstract class AbstractCouponHandler implements CouponHandler {
     private nextHandler: CouponHandler | null = null;
 
     public setNext(handler: CouponHandler): CouponHandler {
@@ -10,12 +10,10 @@ abstract class AbstractCouponHandler implements CouponHandler {
         return handler;
     }
 
-    public process(user: IUser, coupon: ICoupon): ICoupon | null {
+    public process(coupon: ICoupon, user?: IUser): ICoupon | null {
         if (this.nextHandler) {
-            return this.nextHandler.process(user, coupon);
+            return this.nextHandler.process(coupon, user);
         }
         return null;
     }
 }
-
-export default AbstractCouponHandler;

@@ -5,12 +5,12 @@ import LimitHandler from "./handlers/LimitHandler";
 import UserHandler from "./handlers/UserHandler";
 
 export default class CouponValidator {
-    public handle(user: IUser, coupon: ICoupon) {
+    public handle(coupon: ICoupon, user?: IUser) {
         const userHandler = new UserHandler();
         const limitHandler = new LimitHandler();
         const expireHandler = new ExpireHandler();
 
         userHandler.setNext(limitHandler).setNext(expireHandler);
-        return userHandler.process(user, coupon);
+        return userHandler.process(coupon, user);
     }
 }

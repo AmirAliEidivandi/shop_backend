@@ -1,9 +1,9 @@
 import { config as loadEnvironmentsVars } from "dotenv";
-import { App } from "./app";
+import App from "./app";
 import startMongoose from "../infrastructure/connections/mongoose";
 
 loadEnvironmentsVars();
 startMongoose();
-const port: number = 8000;
-const application = new App((process.env.PORT as undefined) || port);
+const port: number = (process.env.PORT as unknown as number) || 8080;
+const application = new App(port);
 application.start();

@@ -30,7 +30,7 @@ export default class BasketMemoryProvider implements IBasket {
         const totalBasket = this.basketItems.reduce((total, product: IProduct) => {
             return total + product.price;
         }, 0);
-        
+
         return Promise.resolve(totalBasket);
     }
 

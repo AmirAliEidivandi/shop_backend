@@ -15,7 +15,7 @@ export default class OrdersController {
 
     public async index(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
-            const orders = await this.ordersRepository.findMany({});
+            const orders = await this.ordersRepository.findMany({}, ['user', 'coupon']);
             const transformedOrders = this.orderTransformer.collection(orders);
             res.status(200).json(transformedOrders);
         } catch (error) {

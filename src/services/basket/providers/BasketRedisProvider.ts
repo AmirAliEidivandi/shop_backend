@@ -1,7 +1,7 @@
-import IProduct from "src/components/product/model/IProduct";
 import IBasket from "../contracts/IBasket";
-import redisConnection from "../../../../infrastructure/connections/redis";
 import IBasketConfigurable from "../contracts/IBasketConfigurable";
+import IProduct from "src/components/product/model/IProduct";
+import redisConnection from "infrastructure/connections/redis";
 
 export default class BasketRedisProvider implements IBasket, IBasketConfigurable {
     private key: string = "";
@@ -28,7 +28,7 @@ export default class BasketRedisProvider implements IBasket, IBasketConfigurable
             });
     }
 
-    public remove(product: IProduct): void {
+    public async remove(product: IProduct): Promise<void> {
         redisConnection
             .get(this.key)
             .then((result) => {

@@ -13,8 +13,14 @@ export default class OrderMongoRepository implements IOrderRepository {
         return Order.findById(ID);
     }
 
-    public async findMany(params: any): Promise<IOrder[]> {
-        return Order.find(params);
+    public async findMany(params: any, relations?: string[]): Promise<IOrder[]> {
+        const orderQuery = Order.find(params);
+        if (relations && relations.length > 0) {
+            relations.forEach((relation: string) => {
+                orderQuery.populate(relation);
+            });
+        }
+        return orderQuery.exec()
     }
 
     public async create(params: any): Promise<IOrder> {

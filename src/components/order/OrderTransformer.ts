@@ -27,7 +27,9 @@ export default class OrderTransformer implements ITransformer<IOrder> {
     }
 
     private getUser(user: any) {
-        !user && null;
+        if (!user) {
+            return null
+        }
         return {
             firstName: user.firstName,
             lastName: user.lastName,
@@ -36,7 +38,9 @@ export default class OrderTransformer implements ITransformer<IOrder> {
     }
 
     private getCoupon(coupon: any) {
-        !coupon && null;
+        if (!coupon) {
+            return null;
+        }
         return {
             code: coupon.code,
             percent: coupon.percent,

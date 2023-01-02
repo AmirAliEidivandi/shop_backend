@@ -3,6 +3,7 @@ import IOrder from "../model/IOrder";
 import OrderStatus from "../model/OrderStatus";
 import IOrderRepository from "./IOrderRepository";
 import Order from "../model/Order";
+import IPagination from "../../contracts/IPagination";
 
 export default class OrderMongoRepository implements IOrderRepository {
     public async findByStatus(status: OrderStatus): Promise<IOrder[]> {
@@ -13,14 +14,17 @@ export default class OrderMongoRepository implements IOrderRepository {
         return Order.findById(ID);
     }
 
-    public async findMany(params: any, relations?: string[]): Promise<IOrder[]> {
+    public async findMany(params: any, relations?: string[], pagination?: IPagination): Promise<IOrder[]> {
         const orderQuery = Order.find(params);
         if (relations && relations.length > 0) {
             relations.forEach((relation: string) => {
                 orderQuery.populate(relation);
             });
         }
-        return orderQuery.exec()
+        if (pagination) {
+            orderQuery.limit(pagination.perPage).skip(pagination.offset);
+        }
+        return orderQuery.exec();
     }
 
     public async create(params: any): Promise<IOrder> {

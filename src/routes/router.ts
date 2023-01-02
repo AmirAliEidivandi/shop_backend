@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-class RouteEngine {
+export default class RouteEngine {
     private routers: Map<string, Router> = new Map<string, Router>();
 
     public registerRouter(route: string, router: Router) {
@@ -13,5 +13,3 @@ class RouteEngine {
 
     public run(): void {}
 }
-
-export default RouteEngine;

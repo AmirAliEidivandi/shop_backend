@@ -3,9 +3,22 @@ import IOrder from "../model/IOrder";
 import OrderStatus from "../model/OrderStatus";
 import IOrderRepository from "./IOrderRepository";
 import Order from "../model/Order";
-import IPagination from "../../contracts/IPagination";
-
+import IPagination from "Components/contracts/IPagination";
+import IUser from "Components/users/model/IUser";
+import IUserRepository from "Components/users/repositories/IUserRepository";
+import UserMongoRepository from "Components/users/repositories/UserMongoRepository";
 export default class OrderMongoRepository implements IOrderRepository {
+    private readonly usersRepository: IUserRepository;
+    constructor() {
+        this.usersRepository = new UserMongoRepository();
+    }
+    public async findByUserDetails(userParams: Partial<IUser>, relations?: string[] | undefined, pagination?: IPagination | undefined): Promise<IOrder[]> {
+        const users = await this.usersRepository.findMany({
+            $or: [{ firstName: { $regex: userParams.firstName } }, { lastName: { $regex: userParams.lastName } }, { email: { $regex: userParams.email } }],
+        });
+        return this.findMany({ user: { $in: users.map((user: IUser) => user._id) } }, relations, pagination);
+    }
+
     public async findByStatus(status: OrderStatus): Promise<IOrder[]> {
         return Order.find({ status });
     }

@@ -18,11 +18,23 @@ export default class OrdersController {
             const perPage = 10;
             const page = req.query.page || 1;
             const offset = ((page as number) - 1) * perPage;
-            const orders = await this.ordersRepository.findMany({}, ["user", "coupon"], {
-                perPage,
-                offset,
+            const orders = await this.ordersRepository.findByUserDetails(
+                {
+                    firstName: req.query.keyword as string,
+                    lastName: req.query.keyword as string,
+                    email: req.query.keyword as string,
+                },
+                ["user", "coupon"],
+                {
+                    perPage,
+                    offset,
+                }
+            );
+            const totalOrders = await this.ordersRepository.findByUserDetails({
+                firstName: req.query.keyword as string,
+                lastName: req.query.keyword as string,
+                email: req.query.keyword as string,
             });
-            const totalOrders = await this.ordersRepository.findMany({});
             const transformedOrders = this.orderTransformer.collection(orders);
             res.status(200).json({
                 data: transformedOrders,

@@ -1,8 +1,8 @@
 import { faker } from "@faker-js/faker";
-import AdviceToBuy from "../../components/comments/model/AdviceToBuy";
-import CommentStatus from "../../components/comments/model/CommentStatus";
-import IComment from "../../components/comments/model/IComment";
-import Comment from "../../components/comments/model/Comment";
+import AdviceToBuy from "components/comments/model/AdviceToBuy";
+import CommentStatus from "components/comments/model/CommentStatus";
+import IComment from "components/comments/model/IComment";
+import Comment from "components/comments/model/Comment";
 import { create as createUser } from "./UserFactory";
 import { create as createProduct } from "./ProductFactory";
 

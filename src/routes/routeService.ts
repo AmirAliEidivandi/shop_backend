@@ -1,14 +1,14 @@
 import { Application, Router } from "express";
 import RouteEngine from "./router";
-import usersRouter from "../components/users/UsersRouter";
-import productsRouter from "../components/product/ProductRouter";
-import categoriesRouter from "../components/category/CategoryRouter";
-import commentsRouter from "../components/comments/CommentRouter";
-import settingsRouter from "../components/settings/SettingRouter";
-import shipmentsRouter from "../components/shipment/ShipmentRouter";
-import paymentsRouter from "../components/payment/PaymentRouter";
-import ordersRouter from "../components/order/OrderRouter";
-import couponsRouter from "../components/coupon/CouponRouter";
+import usersRouter from "components/users/UsersRouter";
+import productsRouter from "components/product/ProductRouter";
+import categoriesRouter from "components/category/CategoryRouter";
+import commentsRouter from "components/comments/CommentRouter";
+import settingsRouter from "components/settings/SettingRouter";
+import shipmentsRouter from "components/shipment/ShipmentRouter";
+import paymentsRouter from "components/payment/PaymentRouter";
+import ordersRouter from "components/order/OrderRouter";
+import couponsRouter from "components/coupon/CouponRouter";
 
 export class RouteService {
     private router: RouteEngine;

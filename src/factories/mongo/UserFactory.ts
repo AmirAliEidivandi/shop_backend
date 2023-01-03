@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker";
-import IUser from "../../components/users/model/IUser";
-import User from "../../components/users/model/User";
+import IUser from "components/users/model/IUser";
+import User from "components/users/model/User";
 import { make as makeAddress } from "./AddressFactory";
 
 faker.setLocale("fa");

@@ -1,8 +1,8 @@
 import { faker } from "@faker-js/faker";
-import IAttribute from "../../components/category/model/IAttribute";
-import IAttributeCategory from "../../components/category/model/IAttributeCategory";
-import ICategory from "../../components/category/model/ICategory";
-import Category from "../../components/category/model/Category";
+import IAttribute from "components/category/model/IAttribute";
+import IAttributeCategory from "components/category/model/IAttributeCategory";
+import ICategory from "components/category/model/ICategory";
+import Category from "components/category/model/Category";
 
 // faker.setLocale('fa')
 function makeAttributes(count: number = 1) {

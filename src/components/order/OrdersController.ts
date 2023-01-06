@@ -15,9 +15,36 @@ export default class OrdersController {
 
     public async index(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
-            const orders = await this.ordersRepository.findMany({}, ['user', 'coupon']);
+            const perPage = 10;
+            const page = req.query.page || 1;
+            const offset = ((page as number) - 1) * perPage;
+            const orders = await this.ordersRepository.findByUserDetails(
+                {
+                    firstName: req.query.keyword as string,
+                    lastName: req.query.keyword as string,
+                    email: req.query.keyword as string,
+                },
+                ["user", "coupon"],
+                {
+                    perPage,
+                    offset,
+                }
+            );
+            const totalOrders = await this.ordersRepository.findByUserDetails({
+                firstName: req.query.keyword as string,
+                lastName: req.query.keyword as string,
+                email: req.query.keyword as string,
+            });
             const transformedOrders = this.orderTransformer.collection(orders);
-            res.status(200).json(transformedOrders);
+            res.status(200).json({
+                data: transformedOrders,
+                _metadata: {
+                    page,
+                    perPage,
+                    totalPages: Math.ceil(totalOrders.length / perPage),
+                    totalItems: totalOrders.length,
+                },
+            });
         } catch (error) {
             next(error);
         }

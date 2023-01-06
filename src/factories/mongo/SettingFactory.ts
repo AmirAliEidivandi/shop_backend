@@ -1,7 +1,7 @@
 import { faker } from "@faker-js/faker";
-import SettingScope from "../../components/settings/model/SettingScope";
 import ISetting from "../../components/settings/model/ISetting";
 import Setting from "../../components/settings/model/Setting";
+import SettingScope from "../../components/settings/model/SettingScope";
 
 // faker.setLocale('fa')
 export async function create(count: number = 1, params?: Partial<ISetting>) {

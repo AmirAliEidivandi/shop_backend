@@ -4,6 +4,10 @@ import ICoupon from "../model/ICoupon";
 import ICouponRepository from "./ICouponRepository";
 
 export default class CouponMongoRepository implements ICouponRepository {
+    public async findByCode(code: string): Promise<ICoupon | null> {
+        return Coupon.findOne({ code });
+    }
+
     public async findOne(ID: string): Promise<ICoupon | null> {
         return Coupon.findById(ID);
     }

@@ -3,8 +3,22 @@ import IOrder from "../model/IOrder";
 import OrderStatus from "../model/OrderStatus";
 import IOrderRepository from "./IOrderRepository";
 import Order from "../model/Order";
-
+import IPagination from "../../contracts/IPagination";
+import IUser from "../../users/model/IUser";
+import IUserRepository from "../../users/repositories/IUserRepository";
+import UserMongoRepository from "../../users/repositories/UserMongoRepository";
 export default class OrderMongoRepository implements IOrderRepository {
+    private readonly usersRepository: IUserRepository;
+    constructor() {
+        this.usersRepository = new UserMongoRepository();
+    }
+    public async findByUserDetails(userParams: Partial<IUser>, relations?: string[] | undefined, pagination?: IPagination | undefined): Promise<IOrder[]> {
+        const users = await this.usersRepository.findMany({
+            $or: [{ firstName: { $regex: userParams.firstName } }, { lastName: { $regex: userParams.lastName } }, { email: { $regex: userParams.email } }],
+        });
+        return this.findMany({ user: { $in: users.map((user: IUser) => user._id) } }, relations, pagination);
+    }
+
     public async findByStatus(status: OrderStatus): Promise<IOrder[]> {
         return Order.find({ status });
     }
@@ -13,14 +27,17 @@ export default class OrderMongoRepository implements IOrderRepository {
         return Order.findById(ID);
     }
 
-    public async findMany(params: any, relations?: string[]): Promise<IOrder[]> {
+    public async findMany(params: any, relations?: string[], pagination?: IPagination): Promise<IOrder[]> {
         const orderQuery = Order.find(params);
         if (relations && relations.length > 0) {
             relations.forEach((relation: string) => {
                 orderQuery.populate(relation);
             });
         }
-        return orderQuery.exec()
+        if (pagination) {
+            orderQuery.limit(pagination.perPage).skip(pagination.offset);
+        }
+        return orderQuery.exec();
     }
 
     public async create(params: any): Promise<IOrder> {

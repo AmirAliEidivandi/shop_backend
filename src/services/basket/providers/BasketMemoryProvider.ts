@@ -1,4 +1,4 @@
-import IProduct from "components/product/model/IProduct";
+import IProduct from "../../../components/product/model/IProduct";
 import IBasket from "../contracts/IBasket";
 
 export default class BasketMemoryProvider implements IBasket {

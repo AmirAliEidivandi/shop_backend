@@ -1,7 +1,7 @@
 import { faker } from "@faker-js/faker";
-import ICoupon from "components/coupon/model/ICoupon";
-import CouponStatus from "components/coupon/model/CouponStatus";
-import Coupon from "components/coupon/model/Coupon";
+import ICoupon from "../../components/coupon/model/ICoupon";
+import CouponStatus from "../../components/coupon/model/CouponStatus";
+import Coupon from "../../components/coupon/model/Coupon";
 
 // faker.setLocale('fa')
 export async function create(count: number = 1, params?: Partial<ICoupon>) {

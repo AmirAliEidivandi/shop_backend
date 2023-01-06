@@ -3,10 +3,10 @@ import IOrder from "../model/IOrder";
 import OrderStatus from "../model/OrderStatus";
 import IOrderRepository from "./IOrderRepository";
 import Order from "../model/Order";
-import IPagination from "Components/contracts/IPagination";
-import IUser from "Components/users/model/IUser";
-import IUserRepository from "Components/users/repositories/IUserRepository";
-import UserMongoRepository from "Components/users/repositories/UserMongoRepository";
+import IPagination from "../../contracts/IPagination";
+import IUser from "../../users/model/IUser";
+import IUserRepository from "../../users/repositories/IUserRepository";
+import UserMongoRepository from "../../users/repositories/UserMongoRepository";
 export default class OrderMongoRepository implements IOrderRepository {
     private readonly usersRepository: IUserRepository;
     constructor() {

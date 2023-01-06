@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker";
-import IAddress from "components/users/model/IAddress";
+import IAddress from "../../components/users/model/IAddress";
 
 faker.setLocale("fa");
 export async function make(count: number = 1, params?: Partial<IAddress>) {

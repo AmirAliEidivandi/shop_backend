@@ -1,7 +1,7 @@
 import { faker } from "@faker-js/faker";
-import PaymentStatus from "components/payment/model/PaymentStatus";
-import IPayment from "components/payment/model/IPayment";
-import Payment from "components/payment/model/Payment";
+import PaymentStatus from "../../components/payment/model/PaymentStatus";
+import IPayment from "../../components/payment/model/IPayment";
+import Payment from "../../components/payment/model/Payment";
 import { create as createUser } from "./UserFactory";
 import { create as createOrder } from "./OrderFactory";
 

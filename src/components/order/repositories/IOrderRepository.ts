@@ -1,6 +1,6 @@
-import IPagination from "Components/contracts/IPagination";
-import IRepository from "Components/contracts/IRepository";
-import IUser from "Components/users/model/IUser";
+import IPagination from "../../contracts/IPagination";
+import IRepository from "../../contracts/IRepository";
+import IUser from "../../users/model/IUser";
 import IOrder from "../model/IOrder";
 import OrderStatus from "../model/OrderStatus";
 

@@ -1,11 +1,11 @@
 import { faker } from "@faker-js/faker";
-import ICategory from "components/category/model/ICategory";
-import IAttributeGroup from "components/product/model/IAttributeGroup";
-import IPriceVariation from "components/product/model/IPriceVariation";
-import IProduct from "components/product/model/IProduct";
-import IProductAttribute from "components/product/model/IProductAttribute";
-import IProductVariation, { IProductVariationItem } from "components/product/model/IProductVariation";
-import Product from "components/product/model/Product";
+import ICategory from "../../components/category/model/ICategory";
+import IAttributeGroup from "../../components/product/model/IAttributeGroup";
+import IPriceVariation from "../../components/product/model/IPriceVariation";
+import IProduct from "../../components/product/model/IProduct";
+import IProductAttribute from "../../components/product/model/IProductAttribute";
+import IProductVariation, { IProductVariationItem } from "../../components/product/model/IProductVariation";
+import Product from "../../components/product/model/Product";
 import { create as CreateCategory } from "./CategoryFactory";
 
 faker.setLocale("fa");

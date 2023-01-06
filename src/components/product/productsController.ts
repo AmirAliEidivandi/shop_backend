@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { UploadedFile } from "express-fileupload";
-import UploadService from "services/UploadService";
+import UploadService from "../../services/UploadService";
 import ProductTransformer from "./ProductTransformer";
 import IProductRepository from "./repositories/IProductRepository";
 import ProductMongoRepository from "./repositories/ProductMongoRepository";

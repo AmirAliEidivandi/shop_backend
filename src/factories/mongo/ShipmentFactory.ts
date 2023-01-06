@@ -1,9 +1,9 @@
 import { faker } from "@faker-js/faker";
 import { create as createUser } from "./UserFactory";
 import { create as createOrder } from "./OrderFactory";
-import IShipment from "components/shipment/model/IShipment";
-import ShipmentStatus from "components/shipment/model/ShipmentStatus";
-import Shipment from "components/shipment/model/Shipment";
+import IShipment from "../../components/shipment/model/IShipment";
+import ShipmentStatus from "../../components/shipment/model/ShipmentStatus";
+import Shipment from "../../components/shipment/model/Shipment";
 
 faker.setLocale("fa");
 export async function create(count: number = 1, params?: Partial<IShipment>) {

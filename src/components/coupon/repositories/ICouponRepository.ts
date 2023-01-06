@@ -1,4 +1,4 @@
-import IRepository from "components/contracts/IRepository";
+import IRepository from "../../../components/contracts/IRepository";
 import ICoupon from "../model/ICoupon";
 
 export default interface ICouponRepository extends IRepository<ICoupon> {

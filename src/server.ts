@@ -1,6 +1,6 @@
 import { config as loadEnvironmentsVars } from "dotenv";
 import App from "./app";
-import startMongoose from "Infrastructure/connections/mongoose";
+import startMongoose from "../infrastructure/connections/mongoose";
 
 loadEnvironmentsVars();
 startMongoose();

@@ -1,5 +1,5 @@
-import DateService from "services/DateService";
-import ITransformer from "components/contracts/ITransformer";
+import DateService from "../../services/DateService";
+import ITransformer from "../contracts/ITransformer";
 import IProduct from "./model/IProduct";
 
 export default class ProductTransformer implements ITransformer<IProduct> {

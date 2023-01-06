@@ -1,6 +1,6 @@
 import IBasket from "../contracts/IBasket";
 import IBasketConfigurable from "../contracts/IBasketConfigurable";
-import IProduct from "components/product/model/IProduct";
+import IProduct from "../../../components/product/model/IProduct";
 import redisConnection from "Infrastructure/connections/redis";
 
 export default class BasketRedisProvider implements IBasket, IBasketConfigurable {

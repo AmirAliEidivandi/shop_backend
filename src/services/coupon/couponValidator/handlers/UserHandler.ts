@@ -1,5 +1,5 @@
-import ICoupon from "components/coupon/model/ICoupon";
-import IUser from "components/users/model/IUser";
+import ICoupon from "../../../../components/coupon/model/ICoupon";
+import IUser from "../../../../components/users/model/IUser";
 import AbstractCouponHandler from "../AbstractCouponHandler";
 
 export default class UserHandler extends AbstractCouponHandler {

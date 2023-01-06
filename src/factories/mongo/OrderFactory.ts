@@ -1,8 +1,8 @@
 import { faker } from "@faker-js/faker";
-import IOrder from "components/order/model/IOrder";
-import IOrderLine from "components/order/model/IOrderLine";
-import Order from "components/order/model/Order";
-import OrderStatus from "components/order/model/OrderStatus";
+import IOrder from "../../components/order/model/IOrder";
+import IOrderLine from "../../components/order/model/IOrderLine";
+import Order from "../../components/order/model/Order";
+import OrderStatus from "../../components/order/model/OrderStatus";
 import { create as createUser } from "./UserFactory";
 import { create as createProduct } from "./ProductFactory";
 import { create as createCoupon } from "./CouponFactory";

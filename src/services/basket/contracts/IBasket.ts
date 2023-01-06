@@ -1,4 +1,4 @@
-import IProduct from "components/product/model/IProduct";
+import IProduct from "../../../components/product/model/IProduct";
 
 export default interface IBasket {
     add(product: IProduct): void;

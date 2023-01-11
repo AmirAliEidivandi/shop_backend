@@ -1,24 +1,24 @@
 import { Request, Response, NextFunction } from "express";
+import { catchAsync } from "../../services/CatchAsync";
 import Category from "./model/Category";
 
 export default class CategoriesController {
-    public async store(req: Request, res: Response, next: NextFunction) {
+    public store = catchAsync(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         const newCategory = await Category.create({
             ...req.body,
         });
+        res.status(201).json(newCategory);
+    });
 
-        return res.status(201).json(newCategory);
-    }
-
-    public async list(req: Request, res: Response, next: NextFunction) {
+    public list = catchAsync(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         const categoriesList = await Category.find({}, { title: 1, slug: 1 });
-        return res.status(200).json(categoriesList);
-    }
+        res.status(200).json(categoriesList);
+    });
 
-    public async attributes(req: Request, res: Response, next: NextFunction) {
+    public attributes = catchAsync(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         const categoryID = req.params.id;
         const category = await Category.findById(categoryID);
-        res.status(200).send(
+        res.status(200).json(
             category?.groups.map((group) => {
                 return {
                     title: group.title,
@@ -26,5 +26,5 @@ export default class CategoriesController {
                 };
             })
         );
-    }
+    });
 }

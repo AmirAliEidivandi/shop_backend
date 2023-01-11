@@ -10,7 +10,7 @@ export default class OrderTransformer implements ITransformer<IOrder> {
 
     public transform(item: IOrder) {
         return {
-            id: item.id,
+            id: item._id,
             user: this.getUser(item.user),
             totalPrice: item.totalPrice,
             finalPrice: item.finalPrice,
@@ -23,12 +23,12 @@ export default class OrderTransformer implements ITransformer<IOrder> {
         };
     }
     public collection(items: IOrder[]) {
-        return items?.map((item: IOrder) => this.transform(item));
+        return items.map((item: IOrder) => this.transform(item));
     }
 
     private getUser(user: any) {
         if (!user) {
-            return null
+            return null;
         }
         return {
             firstName: user.firstName,

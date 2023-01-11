@@ -1,5 +1,5 @@
 import { config as loadEnvironmentsVars } from "dotenv";
-import startMongoose from "./src/Infrastructure/connections/mongoose";
+import startMongoose from "./Infrastructure/connections/mongoose";
 import { create as userFactory } from "./src/factories/mongo/UserFactory";
 import { create as productFactory } from "./src/factories/mongo/ProductFactory";
 import { create as orderFactory } from "./src/factories/mongo/OrderFactory";

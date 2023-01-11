@@ -7,7 +7,7 @@ import IPagination from "../../contracts/IPagination";
 import IUser from "../../users/model/IUser";
 import IUserRepository from "../../users/repositories/IUserRepository";
 import UserMongoRepository from "../../users/repositories/UserMongoRepository";
-import OrderQueryInterface from "../OrderQueryInterface";
+import ObjectInterface from "../../contracts/ObjectInterface";
 
 export default class OrderMongoRepository implements IOrderRepository {
     private readonly usersRepository: IUserRepository;
@@ -28,8 +28,8 @@ export default class OrderMongoRepository implements IOrderRepository {
         return orderQuery.exec();
     }
 
-    public async findMany(params: OrderQueryInterface, relations?: string[], pagination?: IPagination): Promise<IOrder[]> {
-        const orderQueryParams: OrderQueryInterface = {};
+    public async findMany(params: ObjectInterface, relations?: string[], pagination?: IPagination): Promise<IOrder[]> {
+        const orderQueryParams: ObjectInterface = {};
         if (params.user) {
             const users = await this.usersRepository.findMany({
                 $or: [{ firstName: { $regex: params.user } }, { lastName: { $regex: params.user } }, { email: { $regex: params.user } }],

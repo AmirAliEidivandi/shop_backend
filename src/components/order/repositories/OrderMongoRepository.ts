@@ -7,28 +7,36 @@ import IPagination from "../../contracts/IPagination";
 import IUser from "../../users/model/IUser";
 import IUserRepository from "../../users/repositories/IUserRepository";
 import UserMongoRepository from "../../users/repositories/UserMongoRepository";
+import OrderQueryInterface from "../OrderQueryInterface";
+
 export default class OrderMongoRepository implements IOrderRepository {
     private readonly usersRepository: IUserRepository;
     constructor() {
         this.usersRepository = new UserMongoRepository();
     }
-    public async findByUserDetails(userParams: Partial<IUser>, relations?: string[] | undefined, pagination?: IPagination | undefined): Promise<IOrder[]> {
-        const users = await this.usersRepository.findMany({
-            $or: [{ firstName: { $regex: userParams.firstName } }, { lastName: { $regex: userParams.lastName } }, { email: { $regex: userParams.email } }],
-        });
-        return this.findMany({ user: { $in: users.map((user: IUser) => user._id) } }, relations, pagination);
-    }
-
     public async findByStatus(status: OrderStatus): Promise<IOrder[]> {
         return Order.find({ status });
     }
 
-    public async findOne(ID: string): Promise<IOrder | null> {
-        return Order.findById(ID);
+    public async findOne(ID: string, relations?: string[]): Promise<IOrder | null> {
+        const orderQuery = Order.findById(ID);
+        if (relations && relations.length > 0) {
+            relations.forEach((relation: string) => {
+                orderQuery.populate(relation);
+            });
+        }
+        return orderQuery.exec();
     }
 
-    public async findMany(params: any, relations?: string[], pagination?: IPagination): Promise<IOrder[]> {
-        const orderQuery = Order.find(params);
+    public async findMany(params: OrderQueryInterface, relations?: string[], pagination?: IPagination): Promise<IOrder[]> {
+        const orderQueryParams: OrderQueryInterface = {};
+        if (params.user) {
+            const users = await this.usersRepository.findMany({
+                $or: [{ firstName: { $regex: params.user } }, { lastName: { $regex: params.user } }, { email: { $regex: params.user } }],
+            });
+            orderQueryParams.user = { $in: users.map((user: IUser) => user._id) };
+        }
+        const orderQuery = Order.find(orderQueryParams);
         if (relations && relations.length > 0) {
             relations.forEach((relation: string) => {
                 orderQuery.populate(relation);

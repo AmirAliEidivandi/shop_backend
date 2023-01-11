@@ -1,5 +1,6 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { UploadedFile } from "express-fileupload";
+import { catchAsync } from "../../services/CatchAsync";
 import UploadService from "../../services/UploadService";
 import ProductTransformer from "./ProductTransformer";
 import IProductRepository from "./repositories/IProductRepository";
@@ -17,12 +18,12 @@ export default class ProductsController {
         this.create = this.create.bind(this);
     }
 
-    public async index(req: Request, res: Response) {
+    public index = catchAsync(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         const allProducts = await this.productsRepository.findMany({});
         res.status(200).json(this.productsTransformer.collection(allProducts));
-    }
+    })
 
-    public async create(req: Request, res: Response) {
+    public create = catchAsync(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         const newProductParams = {
             title: req.body.title,
             price: req.body.price,
@@ -48,6 +49,6 @@ export default class ProductsController {
                 }
             );
         }
-        res.send(newProduct);
-    }
+        res.status(201).json(newProduct);
+    });
 }

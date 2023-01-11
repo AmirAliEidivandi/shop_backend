@@ -1,16 +1,17 @@
 import { NextFunction, Request, Response } from "express";
+import { catchAsync } from "../../services/CatchAsync";
 import User from "./model/User";
 
 export default class UsersController {
     constructor() {
         this.store = this.store.bind(this);
     }
-    public async index(req: Request, res: Response) {
+    public index = catchAsync(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         const users = await User.find();
         res.status(200).json(users);
-    }
+    });
 
-    public async create(req: Request, res: Response) {
+    public create = catchAsync(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         const newUser = await User.create({
             firstName: "amirali",
             lastName: "eidivandi",
@@ -29,19 +30,15 @@ export default class UsersController {
 
         await newUser.save();
         res.status(201).json(newUser);
-    }
+    });
 
-    public async store(req: Request, res: Response, next: NextFunction) {
-        try {
-            const value = Math.random();
-            if (value > 0.5) {
-                throw new Error("thie request cannot be excuted!");
-            }
-            res.send({
-                success: true,
-            });
-        } catch (error) {
-            next(error);
+    public store = catchAsync(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        const value = Math.random();
+        if (value > 0.5) {
+            throw new Error("thie request cannot be excuted!");
         }
-    }
+        res.send({
+            success: true,
+        });
+    });
 }

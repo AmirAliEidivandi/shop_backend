@@ -1,0 +1,44 @@
+import { buildAvatar } from "../../services/AvatarService";
+import DateService from "../../services/DateService";
+import ITransformer from "../contracts/ITransformer";
+import IComment from "./model/IComment";
+
+export default class CommentTransformer implements ITransformer<IComment> {
+    private readonly dateService: DateService;
+    constructor() {
+        this.dateService = new DateService();
+    }
+
+    transform = (item: IComment) => {
+        return {
+            id: item._id,
+            user: this.getUser(item.user),
+            product: this.getProduct(item.product),
+            title: item.title,
+            body: item.body,
+            isBuyer: item.isBuyer,
+            adviceToBuy: item.adviceToBuy,
+            createdAt: this.dateService.toPersian(item.createdAt.toUTCString()),
+            status: item.status,
+        };
+    };
+
+    public collection = (items: IComment[]) => {
+        return items.map((item: IComment) => this.transform(item));
+    };
+
+    private getUser = (user: any) => {
+        return {
+            firstName: user.firstName,
+            lastName: user.lastName,
+            avatar: buildAvatar(user.email),
+        };
+    };
+
+    private getProduct = (product: any) => {
+        return {
+            id: product._id,
+            title: product.title,
+        };
+    };
+}

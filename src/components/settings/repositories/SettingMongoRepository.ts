@@ -1,4 +1,5 @@
 import { FilterQuery } from "mongoose";
+import IPagination from "../../contracts/IPagination";
 import ISetting from "../model/ISetting";
 import Setting from "../model/Setting";
 import ISettingRepository from "./ISettingRepository";
@@ -8,8 +9,12 @@ export default class SettingMongoRepository implements ISettingRepository {
         return Setting.findById(ID);
     }
 
-    public async findMany(params: any): Promise<ISetting[]> {
-        return Setting.find(params);
+    public async findMany(params: any, relations?: string[], pagination?: IPagination): Promise<ISetting[]> {
+        const settingQuery = Setting.find();
+        if (pagination) {
+            settingQuery.limit(pagination.perPage).skip(pagination.offset);
+        }
+        return settingQuery.exec();
     }
 
     public async create(params: any): Promise<ISetting> {
@@ -18,7 +23,7 @@ export default class SettingMongoRepository implements ISettingRepository {
     }
     
     public async updateOne(where: FilterQuery<ISetting>, updateData: Partial<ISetting>): Promise<any> {
-        throw new Error("Method not implemented.");
+        return Setting.updateOne(where, updateData)
     }
 
     public async updateMany(where: FilterQuery<ISetting>, updateData: Partial<ISetting>): Promise<boolean> {

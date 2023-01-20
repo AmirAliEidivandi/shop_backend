@@ -15,9 +15,23 @@ export default class CouponsController {
     }
 
     public index = catchAsync(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-        const coupons = await this.couponsRepository.findMany({});
-        res.status(200).json(this.couponTransformer.collection(coupons));
+        const perPage = 10;
+        const page = req.query.page || 1;
+        const offset = ((page as number) - 1) * perPage;
+        const coupons = await this.couponsRepository.findMany({}, [], { perPage, offset });
+        const totalCoupons = await this.couponsRepository.findMany({});
+        const transformedCoupons = this.couponTransformer.collection(coupons);
+        res.status(200).json({
+            data: transformedCoupons,
+            _metadata: {
+                page,
+                perPage,
+                totalPages: Math.ceil(totalCoupons.length / perPage),
+                totalItems: totalCoupons.length,
+            },
+        });
     });
+
     public store = catchAsync(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         const newCoupon = await this.couponsRepository.create({
             code: req.body.code,

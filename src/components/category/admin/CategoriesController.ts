@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import { catchAsync } from "../../services/CatchAsync";
-import Category from "./model/Category";
+import { catchAsync } from "../../../services/CatchAsync";
+import Category from "../model/Category";
 
 export default class CategoriesController {
     public store = catchAsync(async (req: Request, res: Response, next: NextFunction): Promise<void> => {

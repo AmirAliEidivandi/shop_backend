@@ -1,4 +1,4 @@
-import Exception from "./Exeption";
+import Exception from "./Exception";
 
 export default class ServerException extends Exception {
     constructor(message: string) {

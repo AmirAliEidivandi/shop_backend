@@ -1,6 +1,6 @@
-import DateService from "../../services/DateService";
-import ITransformer from "../contracts/ITransformer";
-import IUser from "./model/IUser";
+import DateService from "../../../services/DateService";
+import ITransformer from "../../contracts/ITransformer";
+import IUser from "../model/IUser";
 
 
 export default class UserTransformer implements ITransformer<IUser> {

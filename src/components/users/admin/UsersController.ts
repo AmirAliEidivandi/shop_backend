@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
-import { catchAsync } from "../../services/CatchAsync";
-import User from "./model/User";
-import IUserRepository from "./repositories/IUserRepository";
-import UserMongoRepository from "./repositories/UserMongoRepository";
+import { catchAsync } from "../../../services/CatchAsync";
+import User from "../model/User";
+import IUserRepository from "../repositories/IUserRepository";
+import UserMongoRepository from "../repositories/UserMongoRepository";
 import UserTransformer from "./UserTransformer";
 
 export default class UsersController {

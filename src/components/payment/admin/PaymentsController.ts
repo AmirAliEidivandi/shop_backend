@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
-import { catchAsync } from "../../services/CatchAsync";
+import { catchAsync } from "../../../services/CatchAsync";
 import PaymentTransformer from "./PaymentTransformer";
-import IPaymentRepository from "./repositories/IPaymentRepository";
-import PaymentMongoRepository from "./repositories/PaymentMongoRepository";
+import IPaymentRepository from "../repositories/IPaymentRepository";
+import PaymentMongoRepository from "../repositories/PaymentMongoRepository";
 
 export default class PaymentsController {
     private readonly paymentRepository: IPaymentRepository;

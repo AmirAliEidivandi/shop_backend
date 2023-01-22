@@ -24,7 +24,7 @@ export default class CommentMongoRepository implements ICommentRepository {
         return commentQuery.exec();
     }
 
-    public async findOne(ID: string, relations?: string[]): Promise<IComment | null> {
+    public async findOne(ID: string): Promise<IComment | null> {
         return Comment.findById(ID);
     }
 

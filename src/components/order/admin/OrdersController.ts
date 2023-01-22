@@ -1,11 +1,11 @@
 import { NextFunction, Request, Response } from "express";
-import { catchAsync } from "../../services/CatchAsync";
-import NotFoundException from "../exceptions/NotFoundException";
-import IOrder from "./model/IOrder";
-import OrderService from "./OrderService";
+import { catchAsync } from "../../../services/CatchAsync";
+import NotFoundException from "../../exceptions/NotFoundException";
+import IOrder from "../model/IOrder";
+import OrderService from "../OrderService";
 import OrderTransformer from "./OrderTransformer";
-import IOrderRepository from "./repositories/IOrderRepository";
-import OrderMongoRepository from "./repositories/OrderMongoRepository";
+import IOrderRepository from "../repositories/IOrderRepository";
+import OrderMongoRepository from "../repositories/OrderMongoRepository";
 
 export default class OrdersController {
     private readonly ordersRepository: IOrderRepository;

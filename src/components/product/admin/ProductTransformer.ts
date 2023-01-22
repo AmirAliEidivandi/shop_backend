@@ -1,6 +1,6 @@
-import DateService from "../../services/DateService";
-import ITransformer from "../contracts/ITransformer";
-import IProduct from "./model/IProduct";
+import DateService from "../../../services/DateService";
+import ITransformer from "../../contracts/ITransformer";
+import IProduct from "../model/IProduct";
 
 export default class ProductTransformer implements ITransformer<IProduct> {
     private readonly dateService: DateService;

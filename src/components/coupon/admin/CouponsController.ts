@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
-import { catchAsync } from "../../services/CatchAsync";
+import { catchAsync } from "../../../services/CatchAsync";
 import CouponTransformer from "./CouponTransformer";
-import CouponMongoRepository from "./repositories/CouponMongoRepository";
-import ICouponRepository from "./repositories/ICouponRepository";
+import CouponMongoRepository from "../repositories/CouponMongoRepository";
+import ICouponRepository from "../repositories/ICouponRepository";
 
 export default class CouponsController {
     private readonly couponsRepository: ICouponRepository;

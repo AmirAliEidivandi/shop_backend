@@ -1,10 +1,10 @@
 import { NextFunction, Request, Response } from "express";
 import { UploadedFile } from "express-fileupload";
-import { catchAsync } from "../../services/CatchAsync";
-import UploadService from "../../services/UploadService";
+import { catchAsync } from "../../../services/CatchAsync";
+import UploadService from "../../../services/UploadService";
 import ProductTransformer from "./ProductTransformer";
-import IProductRepository from "./repositories/IProductRepository";
-import ProductMongoRepository from "./repositories/ProductMongoRepository";
+import IProductRepository from "../repositories/IProductRepository";
+import ProductMongoRepository from "../repositories/ProductMongoRepository";
 
 export default class ProductsController {
     private productsRepository: IProductRepository;

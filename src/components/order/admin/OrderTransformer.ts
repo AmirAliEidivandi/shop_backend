@@ -1,6 +1,6 @@
-import DateService from "../../services/DateService";
-import ITransformer from "../contracts/ITransformer";
-import IOrder from "./model/IOrder";
+import DateService from "../../../services/DateService";
+import ITransformer from "../../contracts/ITransformer";
+import IOrder from "../model/IOrder";
 
 export default class OrderTransformer implements ITransformer<IOrder> {
     private dateService: DateService;
